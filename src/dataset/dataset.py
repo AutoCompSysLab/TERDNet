@@ -87,7 +87,6 @@ class CDDataset(Dataset):
         output = PIL.ImageOps.invert(output)
         return output
 
-"""
 def get_transforms(args, train, size_dict=None):
     mean=(0.485, 0.456, 0.406)
     std=(0.229, 0.224, 0.225)
@@ -118,70 +117,6 @@ def get_transforms(args, train, size_dict=None):
     augs.append(T.ToTensor())
     augs.append(T.Normalize(mean=mean, std=std))
     augs.append(T.ConcatImages())
-    transforms = T.Compose(augs)
-    revert_transforms = T.Compose([
-        T.SplitImages(),
-        T.RevertNormalize(mean=mean, std=std),
-        T.ToPILImage()
-    ])
-    return transforms, revert_transforms
-"""
-
-def get_transforms(args, train, size_dict=None):
-    mean = (0.485, 0.456, 0.406)
-    std  = (0.229, 0.224, 0.225)
-
-    if size_dict is not None:
-        assert args.input_size in size_dict, "input_size: {}".format(size_dict.keys())
-        input_size = size_dict[args.input_size]
-    else:
-        input_size = args.input_size
-
-    mode = "Train" if train else "Test"
-    print("{} Aug:".format(mode))
-
-    augs = []
-    if train:
-        if args.randomcrop:
-            if args.input_size == 256:
-                augs.append(T.Resize(286))
-                augs.append(T.RandomCrop(input_size))
-            elif args.input_size == 512:
-                augs.append(T.Resize((572, 572)))
-                augs.append(T.RandomCrop(512))
-            else:
-                raise ValueError(args.input_size)
-        else:
-            augs.append(T.Resize(input_size))
-        augs.append(T.RandomHorizontalFlip(args.randomflip))
-    else:
-        # ---------- Test-time transforms ----------
-        augs.append(T.Resize(input_size))
-
-        # A(t0)-only registration noise (optional)
-        # expects argparse defs:
-        #   --add-noise {none, homography, translation} (stored as args.add_noise)
-        #   --noise-px INT (stored as args.noise_px)
-        add_noise = getattr(args, "add_noise", "none")
-        noise_px = int(getattr(args, "noise_px", 0) or 0)
-
-        if add_noise == "homography" and noise_px > 0:
-            # Apply homography (corner jitter ±noise_px) to A only
-            augs.append(T.ApplyHomographyToA(jitter_px=noise_px, fill=0))
-            print(f"  [Test] A-only noise: homography (±{noise_px}px)")
-        elif add_noise == "translation" and noise_px > 0:
-            # Apply translation (|dx|,|dy| ≤ noise_px) to A only
-            augs.append(T.ApplyTranslationToA(max_shift_px=noise_px, fill=0))
-            print(f"  [Test] A-only noise: translation (±{noise_px}px)")
-        else:
-            # clean evaluation
-            pass
-        # ------------------------------------------
-
-    augs.append(T.ToTensor())
-    augs.append(T.Normalize(mean=mean, std=std))
-    augs.append(T.ConcatImages())
-
     transforms = T.Compose(augs)
     revert_transforms = T.Compose([
         T.SplitImages(),

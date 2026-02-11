@@ -11,7 +11,6 @@ class VL_CMU_CD(CDDataset):
     # all images are 512x512
     def __init__(self, root, rotation=True, transforms=None, revert_transforms=None):
         super(VL_CMU_CD, self).__init__(root, transforms)
-        root = root.replace('/opt/Dataset/VL-CMU-CD/', '/home/main/datasets/')
         self.root = root
         self.rotation = rotation
         self.gt, self.t0, self.t1 = self._init_data_list()
@@ -53,8 +52,7 @@ class VL_CMU_CD_Raw(CDDataset):
     # all images are 1024x768
     def __init__(self, root, transforms=None, revert_transforms=None):
         super(VL_CMU_CD_Raw, self).__init__(root, transforms)
-        self.root = root #'/home/main/datasets/VL-CMU-CD-binary255/train'
-        self.root.replace('opt/Dataset', 'home/main/datasets')
+        self.root = root
         self.gt, self.t0, self.t1 = self._init_data_list()
         self._transforms = transforms
         self._revert_transforms = revert_transforms

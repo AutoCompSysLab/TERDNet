@@ -153,10 +153,15 @@ class ToTensor(object):
         return image, target
 
 class PILToTensor:
+    def __init__(self, target_transform=None):
+        self.target_transform = target_transform
+
     def __call__(self, image, target):
         #image = F.pil_to_tensor(image)
         image = proc_image(image, F.to_tensor)
         target = torch.as_tensor(np.array(target).copy(), dtype=torch.int64)
+        if self.target_transform:
+            target = self.target_transform(target)
         return image, target
 
 class ConvertImageDtype:
@@ -214,82 +219,3 @@ class SplitImages(object):
     def __call__(self, image):
         image = torch.split(image, 3, 0)
         return image
-"""
-class ApplyHomographyToA(object):
-    def __init__(self, jitter_px=10, fill=0, interpolation=Image.BILINEAR):
-        self.jitter_px = jitter_px
-        self.fill = fill
-        self.interp = interpolation
-        print(f"TEST NOISE: Homography(A-only), jitter ±{jitter_px}px")
-
-    def __call__(self, image, target):
-        # image: [t0, t1] (PIL list), target: PIL
-        assert isinstance(image, (list, tuple)) and len(image) == 2
-        t0, t1 = image
-        w, h = t0.size
-        start = [(0,0), (w-1,0), (w-1,h-1), (0,h-1)]
-        def jitter(pt):
-            x, y = pt
-            dx = random.randint(-self.jitter_px, self.jitter_px)
-            dy = random.randint(-self.jitter_px, self.jitter_px)
-            return (x+dx, y+dy)
-        end = [jitter(p) for p in start]
-        t0p = F.perspective(t0, startpoints=start, endpoints=end,
-                            interpolation=self.interp, fill=self.fill)
-        return [t0p, t1], target
-
-class ApplyTranslationToA(object):
-    def __init__(self, max_shift_px=10, fill=0, interpolation=Image.BILINEAR):
-        self.max_shift_px = max_shift_px
-        self.fill = fill
-        self.interp = interpolation
-        print(f"TEST NOISE: Translation(A-only), max_shift ±{max_shift_px}px")
-
-    def __call__(self, image, target):
-        assert isinstance(image, (list, tuple)) and len(image) == 2
-        t0, t1 = image
-        dx = random.randint(-self.max_shift_px, self.max_shift_px)
-        dy = random.randint(-self.max_shift_px, self.max_shift_px)
-        t0p = F.affine(t0, angle=0, translate=(dx, dy), scale=1.0, shear=(0, 0),
-                       interpolation=self.interp, fill=self.fill)
-        return [t0p, t1], target
-"""
-
-class ApplyHomographyToA(object):
-    def __init__(self, jitter_px=10, fill=0, interpolation=Image.BILINEAR):
-        self.jitter_px = jitter_px
-        self.fill = fill
-        self.interp = interpolation
-        print(f"TEST NOISE: Homography(A-only), jitter ±{jitter_px}px")
-
-    def __call__(self, image, target):
-        # image: [t0, t1] (PIL list), target: PIL
-        assert isinstance(image, (list, tuple)) and len(image) == 2
-        t0, t1 = image
-        w, h = t1.size
-        start = [(0,0), (w-1,0), (w-1,h-1), (0,h-1)]
-        def jitter(pt):
-            x, y = pt
-            dx = random.randint(-self.jitter_px, self.jitter_px)
-            dy = random.randint(-self.jitter_px, self.jitter_px)
-            return (x+dx, y+dy)
-        end = [jitter(p) for p in start]
-        t1p = F.perspective(t1, startpoints=start, endpoints=end,
-                            interpolation=self.interp, fill=self.fill)
-        return [t0, t1p], target
-
-class ApplyTranslationToA(object):
-    def __init__(self, max_shift_px=10, fill=0, interpolation=Image.BILINEAR):
-        self.max_shift_px = max_shift_px
-        self.fill = fill
-        self.interp = interpolation
-        print(f"TEST NOISE: Translation(A-only), max_shift ±{max_shift_px}px")
-
-    def __call__(self, image, target):
-        assert isinstance(image, (list, tuple)) and len(image) == 2
-        t0, t1 = image
-        dx = random.randint(-self.max_shift_px, self.max_shift_px)
-        dy = random.randint(-self.max_shift_px, self.max_shift_px)
-        t1p = F.affine(t1, angle=0, translate=(dx, dy), scale=1.0, shear=(0, 0),
-                       interpolation=self.interp, fill=self.fill)
-        return [t0, t1p], target

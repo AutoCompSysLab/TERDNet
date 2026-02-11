@@ -77,7 +77,6 @@ def get_pcd_raw(args, sub, num=0, train=True):
     assert sub in ['GSV', 'TSUNAMI']
     assert num in [0, 1, 2, 3, 4]
     root = os.path.join(Data_path.get_dataset_path('PCD_raw'), sub)
-    root = root.replace('/opt/Dataset/pcd/pcd/', '/home/main/storage/gpuserver00_storage/')
     input_size = args.input_size
     size_dict = {
         224: (224, 1024),
