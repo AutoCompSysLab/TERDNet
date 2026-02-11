@@ -1,57 +1,64 @@
 # TERDNet
 
-This repository represents the official implementation of the paper titled "TERDNet: Transformer Encoder-Recurrent Decoder Network for Scene Change Detection (ICRA 2026)".
+Transformer Encoder–Recurrent Decoder Network for Scene Change Detection
+ICRA 2026 Official Implementation
 
-[![License](https://img.shields.io/badge/license-MIT-blue)](https://github.com/AutoCompSysLab/TERDNet/blob/main/LICENSE)
-[![Python](https://img.shields.io/badge/python-%3E%3D3.8-blue)](https://www.python.org/)
-[![PyTorch](https://img.shields.io/badge/pytorch-%3E%3D1.12-red)](https://pytorch.org/)
-[![ICRA 2026](https://img.shields.io/badge/ICRA-2026-brightgreen)](https://github.com/AutoCompSysLab/TERDNet)
-
-
-## 📌 Overview
-
-![TERDNet Pipeline](assets/pipeline_overview.png)
+[![Paper](https://img.shields.io/badge/ICRA-2026-blue)](https://github.com/AutoCompSysLab/TERDNet)
+[![PyTorch](https://img.shields.io/badge/Framework-PyTorch-red)](https://github.com/AutoCompSysLab/TERDNet)
 
 
-## 🔧 Installation
+## Overview
 
-### Requirements
+This repository provides the official implementation of **TERDNet**, proposed in:
 
-- Python ≥ 3.8  
-- PyTorch  
-- numpy, scipy  
-- open3d  
-- tqdm
+> TERDNet: Transformer Encoder–Recurrent Decoder Network for Scene Change Detection
+> ICRA 2026
 
-Install dependencies:
+<p align="center">
+  <img src="images/terdnet_teaser.png" width="85%">
+</p>
 
-```bash
-pip install -r requirements.txt
-````
+TERDNet consists of:
 
-## 📦 Dataset Preparation
+* Transformer-based encoder
+* Correlation-aware feature fusion module
+* 3-gate GRU recurrent decoder
+* Progressive upsampling module
 
-This repository does **not include dataset files**.
-Please prepare datasets manually and set the root path in:
 
-```
-src/dataset/path_config.py
-```
+## Architecture
 
-Example structure:
+<p align="center">
+  <img src="images/terdnet_main_fig.png" width="85%">
+</p>
 
-```
-datasets/
-    VL_CMU_CD/
-        train/
-        val/
-        test/
-        annotations.json
-```
 
-## 🚀 Usage
+## Datasets
 
-### 📍 Train
+We follow the official splits of the following Scene Change Detection benchmarks:
+
+- **VL-CMU-CD**  
+  http://vl-cmu-cd.cs.cmu.edu/
+
+- **TSUNAMI**  
+  https://github.com/SakuradaK/ChangeDetectionDataset
+
+- **PSCD**  
+  https://github.com/KeiSakurada/PSCD
+
+- **ChangeSim**  
+  https://github.com/AI-ChangeSim/ChangeSim
+
+## Pretrained Models
+
+This implementation supports pretrained transformer backbones.
+
+* Segment Anything Model (SAM)
+  [https://github.com/facebookresearch/segment-anything](https://github.com/facebookresearch/segment-anything)
+
+## Training
+
+Example training command:
 
 ```bash
 python -u src/train.py \
@@ -67,52 +74,24 @@ python -u src/train.py \
     --loss-weight
 ```
 
-## 📊 Outputs & Logs
 
-Once training runs, outputs are stored under:
+## Acknowledgement
 
-```
-outputs/
-    run_<timestamp>/
-        checkpoints/
-        logs/
-        metrics.json
-```
+This implementation is built upon:
 
-## 📸 Example Visualizations
+* C-3PO
+  [https://github.com/wgcban/C-3PO](https://github.com/wgcban/C-3PO)
 
-### Qualitative Predictions
+* Segment Anything Model (SAM)
+  [https://github.com/facebookresearch/segment-anything](https://github.com/facebookresearch/segment-anything)
 
-![Qualitative Results](assets/qualitative_examples.png)
+We thank the authors for releasing their code and pretrained models.
 
-Qualitative examples showing TERDNet predictions compared with ground truth.
-
-### Dataset Visualization
-
-![Dataset Example](assets/dataset_example.png)
-
-Input point clouds and annotations for the benchmark dataset.
-
-## 🧠 Acknowledgements
-
-We thank the developers of **Segment Anything (SAM)**, which provided foundation model support for segmentation tasks used in our pipeline, and we acknowledge that parts of this code were adapted and modified from **C-3PO** and related implementations to build the core of TERDNet.
-This work benefited from prior open-source contributions in dynamic perception and scene change detection research.
-
-## 📜 Citation
-
-If you find this work useful, please cite:
-
-```bibtex
-@inproceedings{yourlastname2026terdnet,
-  title={TERDNet: Transformer-based Dynamic Perception Network},
-  author={Your Name and Coauthors},
-  booktitle={Proceedings of the IEEE International Conference on Robotics and Automation (ICRA)},
-  year={2026}
+## Citation
+@InProceedings{Yoon_2026_ICRA,
+    author    = {Yoon, Jiae and Kim, Ue-Hwan},
+    title     = {TERDNet: Transformer Encoder-Recurrent Decoder Network for Scene Change Detection},
+    booktitle = {IEEE International Conference on Robotics and Automation (ICRA)},
+    month     = {June},
+    year      = {2026},
 }
-```
-
-## 🪄 Acknowledgement
-
-✅ We sincerely acknowledge 
-✅ We also thank Segment Anything for providing an excellent vision foundation model.
-
