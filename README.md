@@ -88,6 +88,7 @@ This implementation is built upon:
 We thank the authors for releasing their code and pretrained models.
 
 ## Citation
+```bash
 @InProceedings{Yoon_2026_ICRA,
     author    = {Yoon, Jiae and Kim, Ue-Hwan},
     title     = {TERDNet: Transformer Encoder-Recurrent Decoder Network for Scene Change Detection},
@@ -95,3 +96,4 @@ We thank the authors for releasing their code and pretrained models.
     month     = {June},
     year      = {2026},
 }
+```
