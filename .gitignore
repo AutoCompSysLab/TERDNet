@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.env/
+
+# PyTorch
+*.pt
+*.pth
+checkpoints/
+runs/
+
+# Dataset and temp
+data/
+dataset/
+outputs/
+*.npz
+*.pkl
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Misc
+*.log
+.idea/
+.vscode/
