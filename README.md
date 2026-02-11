@@ -1,41 +1,34 @@
-# TERDNet
+# TERDNet: 
 
 ![TERDNet Pipeline](assets/pipeline_overview.png)
 
 **Official implementation of TERDNet**  
-Transformer-based Dynamic Perception Network  
+
 (*Accepted at IEEE International Conference on Robotics and Automation — ICRA 2026*)
 
+[![License](https://img.shields.io/badge/license-MIT-blue)](https://github.com/AutoCompSysLab/TERDNet/blob/main/LICENSE)
+[![Python](https://img.shields.io/badge/python-%3E%3D3.8-blue)](https://www.python.org/)
+[![PyTorch](https://img.shields.io/badge/pytorch-%3E%3D1.12-red)](https://pytorch.org/)
+[![ICRA 2026](https://img.shields.io/badge/ICRA-2026-brightgreen)](https://github.com/AutoCompSysLab/TERDNet)
 
-![License](https://img.shields.io/badge/license-MIT-blue)
-![Python](https://img.shields.io/badge/python-%3E%3D3.8-blue)
-![PyTorch](https://img.shields.io/badge/pytorch-%3E%3D1.12-red)
-
----
-
-## 🚀 Overview
-
-TERDNet is a transformer-based dynamic perception framework for **scene change detection** and **per-point classification** in 3D point clouds.  
-This repository contains the **official code** used in the ICRA 2026 paper, including dataset interfaces, model definitions, training scripts, and evaluation tools.
 
 ---
 
-## ✨ Key Features
+## 📌 Overview
 
-- Transformer backbone for 3D representation learning  
-- Multi-scale feature fusion with pyramid levels  
-- Iterative decoding for structured predictions  
-- Dataset integration and evaluation utilities
+This repository contains the **official implementation of TERDNet**, .
 
 ---
 
-## 🛠 Installation
+## 🔧 Installation
 
 ### Requirements
 
 - Python ≥ 3.8  
 - PyTorch  
-- numpy, scipy, open3d, tqdm
+- numpy, scipy  
+- open3d  
+- tqdm
 
 Install dependencies:
 
@@ -48,13 +41,13 @@ pip install -r requirements.txt
 ## 📦 Dataset Preparation
 
 This repository does **not include dataset files**.
-Please download and prepare datasets manually. Update your dataset root in:
+Please prepare datasets manually and set the root path in:
 
 ```
 src/dataset/path_config.py
 ```
 
-Example dataset layout:
+Example structure:
 
 ```
 datasets/
@@ -67,9 +60,9 @@ datasets/
 
 ---
 
-## 🎯 Usage
+## 🚀 Usage
 
-### 🧠 Train
+### 📍 Train
 
 ```bash
 python -u src/train.py \
@@ -85,26 +78,11 @@ python -u src/train.py \
     --loss-weight
 ```
 
-### Supported Options
-
-| Flag               | Description                  |
-| ------------------ | ---------------------------- |
-| `--train-dataset`  | Dataset name for training    |
-| `--test-dataset`   | Dataset name for evaluation  |
-| `--data-cv`        | Cross-validation split index |
-| `--input-size`     | Number of input points       |
-| `--model`          | Model backbone               |
-| `--fusion-type`    | Feature fusion method        |
-| `--pyramid-levels` | Pyramid feature levels       |
-| `--decoder-iters`  | Iterative decoding steps     |
-| `--warmup`         | Warmup loss scheduling       |
-| `--loss-weight`    | Weighted loss                |
-
 ---
 
 ## 📊 Outputs & Logs
 
-Training outputs including checkpoints, logs, and evaluation metrics are saved here:
+Once training runs, outputs are stored under:
 
 ```
 outputs/
@@ -118,29 +96,36 @@ outputs/
 
 ## 📸 Example Visualizations
 
-### Qualitative Results
+### Qualitative Predictions
 
 ![Qualitative Results](assets/qualitative_examples.png)
 
-Sample network predictions vs ground-truth labels on benchmark datasets.
+Qualitative examples showing TERDNet predictions compared with ground truth.
 
-### Dataset Example
+### Dataset Visualization
 
 ![Dataset Example](assets/dataset_example.png)
 
-Visualization of input point clouds and annotations.
+Input point clouds and annotations for the benchmark dataset.
+
+---
+
+## 🧠 Acknowledgements
+
+We thank the developers of **Segment Anything (SAM)**, which provided foundation model support for segmentation tasks used in our pipeline, and we acknowledge that parts of this code were adapted and modified from **C-3PO** and related implementations to build the core of TERDNet.
+This work benefited from prior open-source contributions in dynamic perception and scene change detection research.
 
 ---
 
 ## 📜 Citation
 
-If you use this code in your research, please cite:
+If you find this work useful, please cite:
 
 ```bibtex
 @inproceedings{yourlastname2026terdnet,
   title={TERDNet: Transformer-based Dynamic Perception Network},
   author={Your Name and Coauthors},
-  booktitle={Proc. of IEEE International Conference on Robotics and Automation (ICRA)},
+  booktitle={Proceedings of the IEEE International Conference on Robotics and Automation (ICRA)},
   year={2026}
 }
 ```
@@ -156,7 +141,7 @@ This implementation is released under the **MIT License**. See [LICENSE](LICENSE
 ## 💬 Contributing
 
 Contributions, issues, and feature requests are welcome!
-Please open issues or pull requests.
+Feel free to open issues or submit pull requests.
 
 ---
 
@@ -165,32 +150,30 @@ Please open issues or pull requests.
 For questions or support, contact:
 [your.email@institution.edu](mailto:your.email@institution.edu)
 
-````
+```
 
 ---
 
-## 🧠 Quick Notes Before Publishing
+## 📌 Image & File Placeholders
 
-### 📌 Add image assets
+이 README가 제대로 렌더링되도록, 아래 파일들을 `assets/` 폴더에 넣어줘:
 
-Create an `assets/` folder and add images:
-
-| File name                     | Purpose                          |
-|------------------------------|----------------------------------|
-| `pipeline_overview.png`      | Model architecture illustration  |
-| `qualitative_examples.png`   | Example predictions vs GT        |
-| `dataset_example.png`        | Dataset visualization            |
-
-Then the images will render automatically.
+| File name                     | Purpose |
+|------------------------------|---------|
+| `pipeline_overview.png`      | Model architecture / pipeline |
+| `qualitative_examples.png`   | Prediction vs GT examples |
+| `dataset_example.png`        | Dataset visualization |
 
 ---
 
-### 📌 Replace placeholders
+## 🪄 Acknowledgement Explanation
 
-Before the public release, update:
-
-✔ `yourlastname2026terdnet` → your actual BibTeX citation key  
-✔ `Your Name and Coauthors` → full author list  
-✔ `<your.email@institution.edu>` → your contact email
+✅ We explicitly mention SAM usage (as in baseline like the *Towards Generalizable Scene Change Detection* repository) which used SAM for segmentation guidance. :contentReference[oaicite:0]{index=0}  
+✅ We also acknowledge **C-3PO adaptations**, since you modified that code for TERDNet, making your contribution transparent and fair to users.
 
 ---
+
+원하면 **badge 포함형 README**로도 다시 만들어줄게 (예: Paper link badge, Python & PyTorch version, License icon).  
+또는 **ICRA PDF link 추가 또는 ArXiv link** 포함 버전도 만들어줄까? 😄
+::contentReference[oaicite:1]{index=1}
+```
