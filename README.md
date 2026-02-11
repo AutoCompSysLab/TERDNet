@@ -1,10 +1,6 @@
-# TERDNet: 
+# TERDNet
 
-![TERDNet Pipeline](assets/pipeline_overview.png)
-
-**Official implementation of TERDNet**  
-
-(*Accepted at IEEE International Conference on Robotics and Automation — ICRA 2026*)
+This repository represents the official implementation of the paper titled "TERDNet: Transformer Encoder-Recurrent Decoder Network for Scene Change Detection (ICRA 2026)".
 
 [![License](https://img.shields.io/badge/license-MIT-blue)](https://github.com/AutoCompSysLab/TERDNet/blob/main/LICENSE)
 [![Python](https://img.shields.io/badge/python-%3E%3D3.8-blue)](https://www.python.org/)
@@ -12,13 +8,10 @@
 [![ICRA 2026](https://img.shields.io/badge/ICRA-2026-brightgreen)](https://github.com/AutoCompSysLab/TERDNet)
 
 
----
-
 ## 📌 Overview
 
-This repository contains the **official implementation of TERDNet**, .
+![TERDNet Pipeline](assets/pipeline_overview.png)
 
----
 
 ## 🔧 Installation
 
@@ -35,8 +28,6 @@ Install dependencies:
 ```bash
 pip install -r requirements.txt
 ````
-
----
 
 ## 📦 Dataset Preparation
 
@@ -58,8 +49,6 @@ datasets/
         annotations.json
 ```
 
----
-
 ## 🚀 Usage
 
 ### 📍 Train
@@ -78,8 +67,6 @@ python -u src/train.py \
     --loss-weight
 ```
 
----
-
 ## 📊 Outputs & Logs
 
 Once training runs, outputs are stored under:
@@ -91,8 +78,6 @@ outputs/
         logs/
         metrics.json
 ```
-
----
 
 ## 📸 Example Visualizations
 
@@ -108,14 +93,10 @@ Qualitative examples showing TERDNet predictions compared with ground truth.
 
 Input point clouds and annotations for the benchmark dataset.
 
----
-
 ## 🧠 Acknowledgements
 
 We thank the developers of **Segment Anything (SAM)**, which provided foundation model support for segmentation tasks used in our pipeline, and we acknowledge that parts of this code were adapted and modified from **C-3PO** and related implementations to build the core of TERDNet.
 This work benefited from prior open-source contributions in dynamic perception and scene change detection research.
-
----
 
 ## 📜 Citation
 
@@ -130,50 +111,8 @@ If you find this work useful, please cite:
 }
 ```
 
----
+## 🪄 Acknowledgement
 
-## 📄 License
+✅ We sincerely acknowledge 
+✅ We also thank Segment Anything for providing an excellent vision foundation model.
 
-This implementation is released under the **MIT License**. See [LICENSE](LICENSE) for details.
-
----
-
-## 💬 Contributing
-
-Contributions, issues, and feature requests are welcome!
-Feel free to open issues or submit pull requests.
-
----
-
-## 📬 Contact
-
-For questions or support, contact:
-[your.email@institution.edu](mailto:your.email@institution.edu)
-
-```
-
----
-
-## 📌 Image & File Placeholders
-
-이 README가 제대로 렌더링되도록, 아래 파일들을 `assets/` 폴더에 넣어줘:
-
-| File name                     | Purpose |
-|------------------------------|---------|
-| `pipeline_overview.png`      | Model architecture / pipeline |
-| `qualitative_examples.png`   | Prediction vs GT examples |
-| `dataset_example.png`        | Dataset visualization |
-
----
-
-## 🪄 Acknowledgement Explanation
-
-✅ We explicitly mention SAM usage (as in baseline like the *Towards Generalizable Scene Change Detection* repository) which used SAM for segmentation guidance. :contentReference[oaicite:0]{index=0}  
-✅ We also acknowledge **C-3PO adaptations**, since you modified that code for TERDNet, making your contribution transparent and fair to users.
-
----
-
-원하면 **badge 포함형 README**로도 다시 만들어줄게 (예: Paper link badge, Python & PyTorch version, License icon).  
-또는 **ICRA PDF link 추가 또는 ArXiv link** 포함 버전도 만들어줄까? 😄
-::contentReference[oaicite:1]{index=1}
-```
