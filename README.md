@@ -7,11 +7,10 @@ Transformer-based Dynamic Perception Network
 (*Accepted at IEEE International Conference on Robotics and Automation — ICRA 2026*)
 
 
-```
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Python](https://img.shields.io/badge/python-%3E%3D3.8-blue)
 ![PyTorch](https://img.shields.io/badge/pytorch-%3E%3D1.12-red)
-````
+
 ---
 
 ## 🚀 Overview
