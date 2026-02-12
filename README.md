@@ -11,11 +11,11 @@ ICRA 2026 Official Implementation
 
 This repository provides the official implementation of **TERDNet**, proposed in:
 
-> TERDNet: Transformer Encoder–Recurrent Decoder Network for Scene Change Detection
-> ICRA 2026
+TERDNet: Transformer Encoder–Recurrent Decoder Network for Scene Change Detection
+ICRA 2026
 
 <p align="center">
-  <img src="images/terdnet_teaser.png" width="85%">
+  <img src="images/teaser_0.png" width="85%">
 </p>
 
 TERDNet consists of:
